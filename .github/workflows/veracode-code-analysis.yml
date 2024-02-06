@@ -62,9 +62,19 @@ jobs:
     runs-on: ubuntu-latest
     name: import pipeline results to sarif
     permissions:
-      actions: read
-      contents: read
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      id-token: write
+      issues: write
+      metadata: write
+      packages: write
+      pages: write
+      pull-requests: write
+      repository-projects: write
       security-events: write
+      statuses: write
     steps:
       - name: get scan results
         uses: actions/download-artifact@v3
