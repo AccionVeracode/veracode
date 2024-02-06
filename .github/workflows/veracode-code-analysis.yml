@@ -95,3 +95,5 @@ jobs:
         with: # Path to SARIF file relative to the root of the repository
           sarif_file: veracode-results.sarif
           # token: ${{ github.event.client_payload.token }}
+          ref: 'refs/heads/master'
+          sha: ${{ github.event.client_payload.sha }}
