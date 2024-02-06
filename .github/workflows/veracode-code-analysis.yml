@@ -61,18 +61,18 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     name: import pipeline results to sarif
-    permissions:
-      actions: write
-      checks: write
-      contents: write
-      deployments: write
-      issues: write
-      packages: write
-      pages: write
-      pull-requests: write
-      repository-projects: write
-      security-events: write
-      statuses: write
+    # permissions:
+    #   actions: write
+    #   checks: write
+    #   contents: write
+    #   deployments: write
+    #   issues: write
+    #   packages: write
+    #   pages: write
+    #   pull-requests: write
+    #   repository-projects: write
+    #   security-events: write
+    #   statuses: write
     steps:
       - name: get scan results
         uses: actions/download-artifact@v3
@@ -91,4 +91,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with: # Path to SARIF file relative to the root of the repository
           sarif_file: veracode-results.sarif
-          token: ${{ github.event.client_payload.token }}
+          # token: ${{ github.event.client_payload.token }}
