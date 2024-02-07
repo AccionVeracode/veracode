@@ -80,7 +80,10 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with: # Path to SARIF file relative to the root of the repository
           sarif_file: veracode-results.sarif
-          token: ${{secrets.GITHUB_TOKEN}}
+          # token: ${{secrets.GITHUB_TOKEN}}
           # ${{ github.event.client_payload.token }}
           ref: 'refs/heads/master'
           # sha: ${{ github.event.client_payload.sha }}
+        env:
+          GITHUB_TOKEN: ${{ github.event.client_payload.token }}
+          REPO: veracode-local-dev/vulnado
