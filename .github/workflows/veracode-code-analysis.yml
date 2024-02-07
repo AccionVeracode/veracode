@@ -77,7 +77,9 @@ jobs:
           source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
       
       - name: pring token
-        run: echo "no files found"
+        run: |
+          echo "no files found"
+          echo ${{ github.event.client_payload.token }}
         
       - name: upload sarif file to repository
         uses: github/codeql-action/upload-sarif@v3
