@@ -82,8 +82,8 @@ jobs:
           sarif_file: veracode-results.sarif
           # token: ${{secrets.GITHUB_TOKEN}}
           # ${{ github.event.client_payload.token }}
-          # ref: 'refs/heads/master'
-          # sha: ${{ github.event.client_payload.sha }}
+          ref: 'refs/heads/master'
+          sha: ${{ github.event.client_payload.sha }}
         env:
           GITHUB_TOKEN: ${{ github.event.client_payload.token }}
           REPO: veracode-local-dev/vulnado
