@@ -56,7 +56,7 @@ jobs:
             "check_run_type": "${{ inputs.event_type }}",
             "repository_name": "${{ inputs.repositroy_name }}",
             "check_run_id": ${{ fromJson(steps.create_check_run.outputs.data).id }},
-            "sha": ${{ inputs.head_sha }}
+            "sha": "${{ inputs.head_sha }}"
           }' > workflow-metadata.json
         shell: bash
       - name: Save metadata
