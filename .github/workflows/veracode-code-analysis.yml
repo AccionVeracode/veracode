@@ -83,4 +83,4 @@ jobs:
           token: ${{secrets.GITHUB_TOKEN}}
           # ${{ github.event.client_payload.token }}
           ref: 'refs/heads/master'
-          sha: ${{ github.event.client_payload.sha }}
+          # sha: ${{ github.event.client_payload.sha }}
