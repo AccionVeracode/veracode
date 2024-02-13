@@ -64,7 +64,7 @@ jobs:
     # permissions: write-all
     permissions:
       issues: write
-      security-events: write
+      security_events: write
     steps:
       - name: get scan results
         uses: actions/download-artifact@v3
