@@ -61,10 +61,10 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     name: import pipeline results to sarif
-    # permissions: write-all
-    permissions:
-      issues: write
-      security_events: write
+    permissions: write-all
+    # permissions:
+    #   issues: write
+    #   security_events: write
     steps:
       - name: get scan results
         uses: actions/download-artifact@v3
