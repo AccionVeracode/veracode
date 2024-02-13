@@ -61,10 +61,10 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     name: import pipeline results to sarif
-    permissions: write-all
-    # permissions:
+    # permissions: write-all
+    permissions:
     #   issues: write
-    #   security_events: write
+      security_events: write
     steps:
       - name: get scan results
         uses: actions/download-artifact@v3
@@ -81,10 +81,3 @@ jobs:
           commitSHA: ${{ github.event.client_payload.sha }}
           ref: 'refs/heads/master'
           githubToken: ${{ github.event.client_payload.token }}
-      # - name: upload sarif file to repository
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with: # Path to SARIF file relative to the root of the repository
-      #     sarif_file: veracode-results.sarif
-      #     token: ${{ github.event.client_payload.token }}
-      #     ref: 'refs/heads/master'
-      #     sha: ${{ github.event.client_payload.sha }}
