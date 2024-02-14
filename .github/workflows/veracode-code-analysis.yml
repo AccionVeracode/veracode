@@ -44,6 +44,7 @@ jobs:
     uses: ./.github/workflows/veracode-pipeline-scan.yml
     with:
       policy_name: ${{ github.event.client_payload.policy_name }}
+      enable_security_report: ${{ github.event.client_payload.enable_security_report }}
     secrets: inherit
     
   policy_scan:
