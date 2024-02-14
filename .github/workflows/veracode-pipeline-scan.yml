@@ -39,3 +39,25 @@ jobs:
           veracode_policy_name: ${{ inputs.policy_name }}
           file: ./veracode_artifact_directory/${{ env.veracode_artifact }}
           fail_build: true
+
+  results_to_sarif:
+    needs: pipeline_scan
+    if: always()
+    runs-on: ubuntu-latest
+    name: import pipeline results to sarif
+    steps:
+      - name: get scan results
+        uses: actions/download-artifact@v3
+        with:
+          name: "Veracode Pipeline-Scan Results"
+      - name: Convert pipeline scan output to SARIF format
+        id: convert
+        uses: Veracode/veracode-pipeline-scan-results-to-sarif@addWorkflowAppSupport
+        with:
+          pipeline-results-json: filtered_results.json
+          output-results-sarif: veracode-results.sarif
+          repo_owner: ${{ github.event.client_payload.repository.owner }}
+          repo_name: ${{ github.event.client_payload.repository.name }}
+          commitSHA: ${{ github.event.client_payload.sha }}
+          ref: 'refs/heads/master'
+          githubToken: ${{ github.event.client_payload.token }}
