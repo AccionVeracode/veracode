@@ -43,13 +43,13 @@ jobs:
           file: ./veracode_artifact_directory/${{ env.veracode_artifact }}
           fail_build: true
 
-  results_to_sarif:
+  results_to_security_tab:
     needs: pipeline_scan
     runs-on: ubuntu-latest
     if: ${{ inputs.enable_security_report && always()}}
-    name: import pipeline results to sarif
+    name: Send report to Security tab
     steps:
-      - name: get scan results
+      - name: Get scan results
         uses: actions/download-artifact@v3
         with:
           name: "Veracode Pipeline-Scan Results"
@@ -62,5 +62,5 @@ jobs:
           repo_owner: ${{ github.event.client_payload.repository.owner }}
           repo_name: ${{ github.event.client_payload.repository.name }}
           commitSHA: ${{ github.event.client_payload.sha }}
-          ref: 'refs/heads/master'
+          # ref: 'refs/heads/master'
           githubToken: ${{ github.event.client_payload.token }}
