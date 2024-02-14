@@ -6,6 +6,9 @@ on:
       policy_name:
         required: true
         type: string
+      enable_security_report:
+        required: true
+        type: boolean
 
   
 jobs:
@@ -42,8 +45,8 @@ jobs:
 
   results_to_sarif:
     needs: pipeline_scan
-    if: always()
     runs-on: ubuntu-latest
+    if: ${{ inputs.enable_security_report && always()}}
     name: import pipeline results to sarif
     steps:
       - name: get scan results
