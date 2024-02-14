@@ -74,8 +74,13 @@ jobs:
         with:
           pipeline-results-json: filtered_results.json
           output-results-sarif: veracode-results.sarif
-          repo_owner: ${{ inputs.owner }}
-          repo_name: ${{ inputs.name }}
-          commitSHA: ${{ inputs.sha }}
-          ref: ${{ inputs.ref }}
-          githubToken: ${{ inputs.token }}
+          repo_owner: ${{ github.event.client_payload.repository.owner }}
+          repo_name: ${{ github.event.client_payload.repository.name }}
+          commitSHA: ${{ github.event.client_payload.sha }}
+          ref: 'refs/heads/master'
+          githubToken: ${{ github.event.client_payload.token }}
+          # repo_owner: ${{ inputs.owner }}
+          # repo_name: ${{ inputs.name }}
+          # commitSHA: ${{ inputs.sha }}
+          # ref: ${{ inputs.ref }}
+          # githubToken: ${{ inputs.token }}
