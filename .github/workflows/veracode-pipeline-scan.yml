@@ -6,6 +6,21 @@ on:
       policy_name:
         required: true
         type: string
+      owner:
+        required: true
+        type: string
+      repo:
+        required: true
+        type: string
+      sha:
+        required: true
+        type: string
+      token:
+        required: true
+        type: string
+      ref:
+        required: true
+        type: string
       enable_security_report:
         required: true
         type: boolean
@@ -59,8 +74,8 @@ jobs:
         with:
           pipeline-results-json: filtered_results.json
           output-results-sarif: veracode-results.sarif
-          repo_owner: ${{ github.event.client_payload.repository.owner }}
-          repo_name: ${{ github.event.client_payload.repository.name }}
-          commitSHA: ${{ github.event.client_payload.sha }}
-          # ref: 'refs/heads/master'
-          githubToken: ${{ github.event.client_payload.token }}
+          repo_owner: ${{ inputs.owner }}
+          repo_name: ${{ inputs.name }}
+          commitSHA: ${{ inputs.sha }}
+          ref: ${{ inputs.ref }}
+          githubToken: ${{ inputs.token }}
