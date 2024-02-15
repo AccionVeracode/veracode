@@ -73,8 +73,8 @@ jobs:
       - name: Get state of job1
         id: job1_state
         run: |
-          echo "::set-output name=state::${{ needs.pipeline_scan.outputs }}"
-          echo "::set-output name=state::${{ toJson(needs.pipeline_scan.outputs) }}"
+          echo "::set-output name=state::${{ needs.pipeline_scan.result }}"
+          echo "::set-output name=state::${{ toJson(needs.pipeline_scan.result) }}"
       - name: Get scan results
         uses: actions/download-artifact@v3
         with:
