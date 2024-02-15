@@ -62,7 +62,7 @@ jobs:
           
       - name: Set status
         run: |
-          echo "step_status=${{ toJson(steps.pipeline-scan.outputs.data) }}"
+          echo "step_status=${{ toJson(steps.pipeline-scan.outputs) }}"
 
   results_to_security_tab:
     needs: pipeline_scan
