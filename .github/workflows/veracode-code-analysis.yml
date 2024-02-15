@@ -67,7 +67,7 @@ jobs:
       - pipeline_scan
       - policy_scan
     runs-on: ubuntu-latest
-    if: ${{ inputs.enable_security_report && always()}}
+    if: ${{ ${{ github.event.client_payload.enable_security_report }} && always()}}
     name: Send report to Security tab
     steps:
       - name: Get scan results
