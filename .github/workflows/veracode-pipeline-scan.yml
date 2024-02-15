@@ -64,6 +64,9 @@ jobs:
     if: ${{ inputs.enable_security_report && always()}}
     name: Send report to Security tab
     steps:
+      - name: Get state of job1
+        id: job1_state
+        run: echo "::set-output name=state::${{ needs.pipeline_scan.outputs.state }}"
       - name: Get scan results
         uses: actions/download-artifact@v3
         with:
