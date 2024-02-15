@@ -63,7 +63,9 @@ jobs:
     secrets: inherit
 
   results_to_security_tab:
-    needs: pipeline_scan
+    needs: 
+      - pipeline_scan
+      - policy_scan
     runs-on: ubuntu-latest
     if: ${{ inputs.enable_security_report && always()}}
     name: Send report to Security tab
