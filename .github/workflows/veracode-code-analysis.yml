@@ -61,3 +61,25 @@ jobs:
       policy_name: ${{ github.event.client_payload.policy_name }}
       modules_to_scan: ${{ github.event.client_payload.modules_to_scan }}
     secrets: inherit
+
+  results_to_security_tab:
+    needs: pipeline_scan
+    runs-on: ubuntu-latest
+    if: ${{ inputs.enable_security_report && always()}}
+    name: Send report to Security tab
+    steps:
+      - name: Get scan results
+        uses: actions/download-artifact@v3
+        with:
+          name: "Veracode Static-Scan Results"
+      - name: Convert static scan output to SARIF format
+        id: convert
+        uses: Veracode/veracode-pipeline-scan-results-to-sarif@addWorkflowAppSupport
+        with:
+          pipeline-results-json: filtered_results.json
+          output-results-sarif: veracode-results.sarif
+          repo_owner: ${{ github.event.client_payload.repository.owner }}
+          repo_name: ${{ github.event.client_payload.repository.name }}
+          commitSHA: ${{ github.event.client_payload.sha }}
+          ref: ${{ github.event.client_payload.ref }}
+          githubToken: ${{ github.event.client_payload.token }}
