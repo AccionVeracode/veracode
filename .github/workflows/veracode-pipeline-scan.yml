@@ -29,6 +29,8 @@ on:
 jobs:
   pipeline_scan:
     runs-on: ubuntu-latest
+    # outputs:
+    #   step_status: ${{ fromJson(steps.create_check_run.outputs.data).id }}
     name: pipeline scan
 
     steps:
@@ -57,6 +59,10 @@ jobs:
           veracode_policy_name: ${{ inputs.policy_name }}
           file: ./veracode_artifact_directory/${{ env.veracode_artifact }}
           fail_build: true
+          
+      - name: Set status
+        run: |
+          echo "step_status=${{ toJson(steps.pipeline-scan.outputs.data) }}" >> "GITHUB_OUTPUT" 
 
   results_to_security_tab:
     needs: pipeline_scan
